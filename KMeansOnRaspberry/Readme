@@ -1,1 +1,20 @@
 #different command to compiler different files
+
+#Before compiling client files, other necessary command
+sudo modprobe bcm2835-v4l2
+
+# Server
+
+g++-8 Server.cpp Server_HsvOperations.cpp Server_KMeans.cpp Server_KMeans.h Server_socket.cpp Server_socket.h -o Server -fopenmp
+
+# Time_Client
+
+g++ Main1.cpp HsvOperations.cpp ParallelKMeans.cpp ParallelKMeans.h Client.cpp Client.h `pkg-config opencv --cflags --libs` -fopenmp -o node1
+
+# Utilization_Client
+
+g++ Main1.cpp HsvOperations.cpp ParallelKMeans.cpp ParallelKMeans.h Client.cpp Client.h cpu_util.c cpu_util.h `pkg-config opencv --cflags --libs` -fopenmp -o node1
+
+# Optimization
+
+gcc optimization.cpp -o optimization
