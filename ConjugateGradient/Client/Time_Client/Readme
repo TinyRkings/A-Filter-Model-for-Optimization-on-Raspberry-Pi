@@ -1,1 +1,2 @@
 
+g++ RidgeRegressionWithCG.cpp cg.cpp -o RidgeRegressionWithCG
