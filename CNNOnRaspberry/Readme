@@ -18,3 +18,26 @@ g++ run.cpp cnn.h cnn.cpp Client.h Client.cpp cpu_util.c cpu_util.h `pkg-config 
 # Optimization
 
 gcc optimization.cpp -o optimization
+
+
+#The structure of the cnn in torch
+```
+model:add(nn.SpatialConvolutionMM(1, 16, 5, 5))
+model:add(nn.Tanh())
+model:add(nn.SpatialLPPooling(16,2, 2, 2, 2, 2))
+
+model:add(nn.SpatialConvolutionMM(16, 32, 5, 5))
+model:add(nn.Tanh())
+model:add(nn.SpatialLPPooling(32,2,2, 2, 2, 2))
+
+model:add(nn.Reshape(32*5*5))
+model:add(nn.Linear(32*5*5, 256))
+model:add(nn.Tanh())
+model:add(nn.Linear(256, 43))
+```
+
+#About the files
+- `./data/torch-net-to-txt.lua` is used to convert the weight and bias in gtsrb.net to txt file.
+- `./data/gtsrb.net` is trained by Torch7
+- `cnn.cpp cnn.h`: forward cnn class written in c++
+- `run.cpp`: test program
